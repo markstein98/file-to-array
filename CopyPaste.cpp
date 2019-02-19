@@ -1,4 +1,4 @@
-/* fileToArray.h
+/* CopyPaste.cpp
  * 
  * Copyright 2019 Marco Aliberti
  * 
@@ -18,29 +18,62 @@
  * MA 02110-1301, USA.
  */
 
-#ifndef FILETOARRAY_H
-#define FILETOARRAY_H
-
 #include <stdio.h>
 #include <stdlib.h>
 
 class MyData{
 	public:
 	// methods
-	int getSize(void);
-	float* getData(void);
+	int getSize(void){
+		return _ndati;
+	}
+	float* getData(void){
+		return _data;
+	}
 	// attributes
 	
 	// constructor
-	MyData(const char* filename);
+	MyData(const char* filename){
+		_ndati = countData(filename);
+		_data = readData(filename);
+	}
 	private:
 	// methods
-	FILE* myfopen(const char* filename);
-	int countData(const char* filename);
-	float* readData(const char* filename);
+	FILE* myfopen(const char* filename){
+		FILE* fp;
+		fp = fopen(filename, "r");
+		if(fp == NULL){
+			fprintf(stderr,"Error while opening file %s", filename);
+			fprintf(stderr,"\nPress any key to exit.\n");
+			fflush(stdin);
+			getchar();
+			exit(1);
+		}
+		return fp;
+	}
+	int countData(const char* filename){
+		FILE* file;
+		int n;
+		float swap;
+		
+		file = myfopen(filename);
+		for(n=0;fscanf("%f",&swap)==1;n++) {}
+		fclose(file);
+		return n;
+	}
+	float* readData(const char* filename){
+		FILE* file;
+		float* dataArray;
+		
+		dataArray = (float*) malloc(_ndati * sizeof(float));
+		file = myfopen(filename);
+		for(int i=0;i<_ndati;i++){
+			fscanf(file,"%f",&dataArray[i]);
+		}
+		fclose(file);
+		return dataArray;
+	}
 	// attributes
 	int _ndati;
 	float* _data;
 };
-
-#endif
