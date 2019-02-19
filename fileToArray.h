@@ -29,6 +29,9 @@ class MyData{
 	// methods
 	int getSize(void);
 	float* getData(void);
+	void removeFirstData(unsigned int num);
+	void removeData(unsigned int index);
+	void removeLastData(unsigned int num);
 	// attributes
 	
 	// constructor
@@ -39,8 +42,8 @@ class MyData{
 	int countData(const char* filename);
 	float* readData(const char* filename);
 	// attributes
-	int _ndati;
-	float* _data;
+	int _ndati, _ndatiOrig;
+	float* _data, _dataOrig;
 };
 
 #endif

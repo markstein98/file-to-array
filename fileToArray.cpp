@@ -20,10 +20,16 @@
 
 #include "fileToArray.h"
 
+// constructor
+
 MyData::MyData(const char* filename){
-	_ndati = countData(filename);
-	_data = readData(filename);
+	_ndatiOrig = countData(filename);
+	_ndati = _ndatiOrig;
+	_dataOrig = readData(filename);
+	_data = _dataOrig;
 }
+
+// private methods
 
 FILE* MyData::myfopen(const char *filename){
 	FILE* fp;
@@ -49,6 +55,8 @@ int MyData::countData(const char* filename){
 	return n;
 }
 
+// public methods
+
 float* MyData::readData(const char* filename){
 	FILE* file;
 	float* dataArray;
@@ -66,6 +74,26 @@ int MyData::getSize(void){
 	return _ndati;
 }
 
-float* MyData::getData(){
+float* MyData::getData(void){
 	return _data;
+}
+
+void MyData::removeFirstData(unsigned int num){ // removes first num data from array
+	if(num >= _ndati) return;
+	_data = _data + num;
+	_ndati = _ndati - num;
+}
+
+void MyData::removeData(unsigned int index){ // removes data in the given position (0<=index<ndata)
+	//TODO
+	/*if(index >= _ndati) return;
+	for(int i=0;i<_ndati;i++){
+		_data[i]
+	}*/
+	return;
+}
+
+void MyData::removeLastData(unsigned int num){ // removes last num data from array
+	if(num >= _ndati) return;
+	_ndati = _ndati - num;
 }
