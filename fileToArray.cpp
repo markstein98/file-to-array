@@ -86,10 +86,8 @@ void MyData::removeFirstData(unsigned int num){ // removes first num data from a
 
 void MyData::removeData(unsigned int index){ // removes data in the given position (0<=index<ndata)
 	//TODO
-	/*if(index >= _ndati) return;
-	for(int i=0;i<_ndati;i++){
-		_data[i]
-	}*/
+	if(index >= _ndati) return;
+	
 	return;
 }
 
