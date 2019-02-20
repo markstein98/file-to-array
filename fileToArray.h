@@ -27,7 +27,7 @@
 class MyData{
 	public:
 	// methods
-	int getSize(void);
+	unsigned int getSize(void);
 	float* getData(void);
 	void removeFirstData(unsigned int num);
 	void removeData(unsigned int index);
@@ -39,10 +39,10 @@ class MyData{
 	private:
 	// methods
 	FILE* myfopen(const char* filename);
-	int countData(const char* filename);
+	unsigned int countData(const char* filename);
 	float* readData(const char* filename);
 	// attributes
-	int _ndati, _ndatiOrig;
+	unsigned int _ndati, _ndatiOrig;
 	float* _data, _dataOrig;
 };
 

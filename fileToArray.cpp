@@ -44,13 +44,13 @@ FILE* MyData::myfopen(const char *filename){
 	return fp;
 }
 
-int MyData::countData(const char* filename){
+unsigned int MyData::countData(const char* filename){
 	FILE* file;
-	int n;
+	unsigned int n;
 	float swap;
 	
 	file = myfopen(filename);
-	for(n=0;fscanf("%f",&swap)==1;n++) {}
+	for(n=0;fscanf(file,"%f",&swap)==1;n++) {}
 	fclose(file);
 	return n;
 }
@@ -63,14 +63,14 @@ float* MyData::readData(const char* filename){
 	
 	dataArray = (float*) malloc(_ndati * sizeof(float));
 	file = myfopen(filename);
-	for(int i=0;i<_ndati;i++){
+	for(unsigned int i=0;i<_ndati;i++){
 		fscanf(file,"%f",&dataArray[i]);
 	}
 	fclose(file);
 	return dataArray;
 }
 
-int MyData::getSize(void){
+unsigned int MyData::getSize(void){
 	return _ndati;
 }
 
