@@ -43,7 +43,7 @@ class MyData{
 	float* readData(const char* filename);
 	// attributes
 	unsigned int _ndati, _ndatiOrig;
-	float* _data, _dataOrig;
+	float *_data, *_dataOrig;
 };
 
 #endif
