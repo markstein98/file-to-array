@@ -28,7 +28,9 @@ class MyData{
 	public:
 	// methods
 	unsigned int getSize(void);
+	unsigned int getOrigSize(void);
 	float* getData(void);
+	float* getOrigData(void);
 	void removeFirstData(unsigned int num);
 	void removeData(unsigned int index);
 	void removeLastData(unsigned int num);

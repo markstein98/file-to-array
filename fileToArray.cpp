@@ -56,8 +56,6 @@ unsigned int MyData::countData(const char* filename){
 	return n;
 }
 
-// public methods
-
 float* MyData::readData(const char* filename){
 	FILE* file;
 	float* dataArray;
@@ -71,12 +69,22 @@ float* MyData::readData(const char* filename){
 	return dataArray;
 }
 
+//public methods
+
 unsigned int MyData::getSize(void){
 	return _ndati;
 }
 
+unsigned int MyData::getOrigSize(void){
+	return _ndatiOrig;
+}
+
 float* MyData::getData(void){
 	return _data;
+}
+
+float* MyData::getOrigData(void){
+	return _dataOrig;
 }
 
 void MyData::removeFirstData(unsigned int num){ // removes first num data from array
@@ -84,8 +92,12 @@ void MyData::removeFirstData(unsigned int num){ // removes first num data from a
 		fprintf(stderr, "\nCould not remove first %d data.\n", num);
 		return;
 	}
-	_data = _data + num;
+	float *newData;
+	newData = (float *) malloc((_ndati - num)*sizeof(float));
 	_ndati = _ndati - num;
+	newData = (float *) memcpy((void *)newData, (void *)(_data+num),_ndati);
+	free((void *)_data);
+	_data = newData;
 }
 
 void MyData::removeData(unsigned int index){ // removes data in the given position (0<=index<ndata)
@@ -99,7 +111,7 @@ void MyData::removeData(unsigned int index){ // removes data in the given positi
 	newData = (float *) memcpy((void *)newData, (void *)_data, index*sizeof(float));
 	temp = newData + index;
 	temp = (float *) memcpy((void *)temp, (void *)(_data+index+1), (_ndati-index-1)*sizeof(float));
-	free(_data);
+	free((void *)_data);
 	_data = newData;
 }
 
@@ -108,5 +120,10 @@ void MyData::removeLastData(unsigned int num){ // removes last num data from arr
 		fprintf(stderr, "\nCould not remove last %d data.\n", num);
 		return;
 	}
+	float *newData;
 	_ndati = _ndati - num;
+	newData = (float *) malloc(_ndati * sizeof(float));
+	newData = (float *) memcpy((void *)newData, (void *)_data, _ndati);
+	free((void *)_data);
+	_data = newData;
 }
