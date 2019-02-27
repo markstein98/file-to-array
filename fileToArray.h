@@ -27,8 +27,13 @@
 class MyData{
 	public:
 	// methods
-	int getSize(void);
+	unsigned int getSize(void);
+	unsigned int getOrigSize(void);
 	float* getData(void);
+	float* getOrigData(void);
+	void removeFirstData(unsigned int num);
+	void removeData(unsigned int index);
+	void removeLastData(unsigned int num);
 	// attributes
 	
 	// constructor
@@ -36,11 +41,11 @@ class MyData{
 	private:
 	// methods
 	FILE* myfopen(const char* filename);
-	int countData(const char* filename);
+	unsigned int countData(const char* filename);
 	float* readData(const char* filename);
 	// attributes
-	int _ndati;
-	float* _data;
+	unsigned int _ndati, _ndatiOrig;
+	float *_data, *_dataOrig;
 };
 
 #endif

@@ -20,10 +20,17 @@
 
 #include "fileToArray.h"
 
+// constructor
+
 MyData::MyData(const char* filename){
-	_ndati = countData(filename);
-	_data = readData(filename);
+	_ndatiOrig = countData(filename);
+	_ndati = _ndatiOrig;
+	_dataOrig = readData(filename);
+	_data = (float *) malloc(_ndati * sizeof(float));
+	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati);
 }
+
+// private methods
 
 FILE* MyData::myfopen(const char *filename){
 	FILE* fp;
@@ -38,13 +45,13 @@ FILE* MyData::myfopen(const char *filename){
 	return fp;
 }
 
-int MyData::countData(const char* filename){
+unsigned int MyData::countData(const char* filename){
 	FILE* file;
-	int n;
+	unsigned int n;
 	float swap;
 	
 	file = myfopen(filename);
-	for(n=0;fscanf("%f",&swap)==1;n++) {}
+	for(n=0;fscanf(file,"%f",&swap)==1;n++) {}
 	fclose(file);
 	return n;
 }
@@ -55,17 +62,68 @@ float* MyData::readData(const char* filename){
 	
 	dataArray = (float*) malloc(_ndati * sizeof(float));
 	file = myfopen(filename);
-	for(int i=0;i<_ndati;i++){
+	for(unsigned int i=0;i<_ndati;i++){
 		fscanf(file,"%f",&dataArray[i]);
 	}
 	fclose(file);
 	return dataArray;
 }
 
-int MyData::getSize(void){
+//public methods
+
+unsigned int MyData::getSize(void){
 	return _ndati;
 }
 
-float* MyData::getData(){
+unsigned int MyData::getOrigSize(void){
+	return _ndatiOrig;
+}
+
+float* MyData::getData(void){
 	return _data;
+}
+
+float* MyData::getOrigData(void){
+	return _dataOrig;
+}
+
+void MyData::removeFirstData(unsigned int num){ // removes first num data from array
+	if(num >= _ndati){
+		fprintf(stderr, "\nCould not remove first %d data.\n", num);
+		return;
+	}
+	float *newData;
+	newData = (float *) malloc((_ndati - num)*sizeof(float));
+	_ndati = _ndati - num;
+	newData = (float *) memcpy((void *)newData, (void *)(_data+num),_ndati);
+	free((void *)_data);
+	_data = newData;
+}
+
+void MyData::removeData(unsigned int index){ // removes data in the given position (0<=index<ndata)
+	if(index >= _ndati){
+		fprintf(stderr, "\nCould not remove data in position %d.\n", index);
+		return;
+	}
+	float *temp, *newData;
+	newData = (float *) malloc((_ndati - 1) * sizeof(float));
+	temp = (float *) malloc((_ndati - index -1) * sizeof(float));
+	newData = (float *) memcpy((void *)newData, (void *)_data, index*sizeof(float));
+	temp = newData + index;
+	temp = (float *) memcpy((void *)temp, (void *)(_data+index+1), (_ndati-index-1)*sizeof(float));
+	free((void *)_data);
+	_data = newData;
+}
+
+void MyData::removeLastData(unsigned int num){ // removes last num data from array
+	if(num >= _ndati){
+		fprintf(stderr, "\nCould not remove last %d data.\n", num);
+		return;
+	}
+	float *newData;
+	_ndati = _ndati - num;
+	newData = (float *) malloc(_ndati * sizeof(float));
+	newData = (float *) memcpy((void *)newData, (void *)_data, _ndati);
+	free((void *)_data);
+	_data = newData;
 }
