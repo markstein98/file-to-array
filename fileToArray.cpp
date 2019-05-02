@@ -27,7 +27,7 @@ MyData::MyData(const char* filename){
 	_ndati = _ndatiOrig;
 	_dataOrig = readData(filename);
 	_data = (float *) malloc(_ndati * sizeof(float));
-	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati);
+	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati * sizeof(float));
 }
 
 // private methods
