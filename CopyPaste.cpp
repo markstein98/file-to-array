@@ -31,6 +31,10 @@ class MyData{
 	void removeFirstData(unsigned int num);
 	void removeData(unsigned int index);
 	void removeLastData(unsigned int num);
+	void printData(void);
+	void printData(int index);
+	void printOrigData(void);
+	void printOrigData(int index);
 	// attributes
 	
 	// constructor
@@ -50,7 +54,7 @@ MyData::MyData(const char* filename){
 	_ndati = _ndatiOrig;
 	_dataOrig = readData(filename);
 	_data = (float *) malloc(_ndati * sizeof(float));
-	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati);
+	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati * sizeof(float));
 }
 
 // private methods
@@ -149,4 +153,26 @@ void MyData::removeLastData(unsigned int num){ // removes last num data from arr
 	newData = (float *) memcpy((void *)newData, (void *)_data, _ndati);
 	free((void *)_data);
 	_data = newData;
+}
+
+void printData(void){
+	printf("\n\n Data:\n");
+	for(uint i=0;i<_ndati;i++)
+		printf("%f\n", _data[i]);
+	printf("\n\n");
+}
+
+void printData(int index){
+	printf("\n\n Data %d: %f\n\n", index, _data[index]);
+}
+
+void printOrigData(void){
+	printf("\n\n Data:\n");
+	for(uint i=0;i<_ndatiOrig;i++)
+		printf("%f\n", _dataOrig[i]);
+	printf("\n\n");
+}
+
+void printOrigData(int index){
+	printf("\n\n Data %d: %f\n\n", index, _dataOrig[index]);
 }
