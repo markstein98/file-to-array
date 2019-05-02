@@ -34,6 +34,10 @@ class MyData{
 	void removeFirstData(unsigned int num);
 	void removeData(unsigned int index);
 	void removeLastData(unsigned int num);
+	void printData(void);
+	void printData(int index);
+	void printOrigData(void);
+	void printOrigData(int index);
 	// attributes
 	
 	// constructor

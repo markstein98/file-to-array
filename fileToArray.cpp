@@ -127,3 +127,25 @@ void MyData::removeLastData(unsigned int num){ // removes last num data from arr
 	free((void *)_data);
 	_data = newData;
 }
+
+void printData(void){
+	printf("\n\n Data:\n");
+	for(uint i=0;i<_ndati;i++)
+		printf("%f\n", _data[i]);
+	printf("\n\n");
+}
+
+void printData(int index){
+	printf("\n\n Data %d: %f\n\n", index, _data[index]);
+}
+
+void printOrigData(void){
+	printf("\n\n Data:\n");
+	for(uint i=0;i<_ndatiOrig;i++)
+		printf("%f\n", _dataOrig[i]);
+	printf("\n\n");
+}
+
+void printOrigData(int index){
+	printf("\n\n Data %d: %f\n\n", index, _dataOrig[index]);
+}
