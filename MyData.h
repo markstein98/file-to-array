@@ -41,7 +41,8 @@ class MyData{
 	// attributes
 	
 	// constructor
-	MyData(const char* filename = "");
+	MyData(float value = 0.0, int size = 1);
+	MyData(const char* filename);
 	MyData(MyData* oldData);
 	private:
 	// methods

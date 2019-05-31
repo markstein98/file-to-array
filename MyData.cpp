@@ -22,8 +22,18 @@
 
 // constructor
 
-MyData::MyData(const char* filename = ""){
-	if(strcmp(filename,"") == 0) return NULL;
+MyData::MyData(float value = 0.0, float size = 1){
+	_ndatiOrig = size;
+	_ndati = size;
+	_dataOrig = (float *) malloc(_ndati * sizeof(float));
+	_data = (float *) malloc(_ndati * sizeof(float));
+	for(int i=0;i<_ndati;i++){
+		_dataOrig[i] = value;
+		_data[i] = value;
+	}
+}
+
+MyData::MyData(const char* filename){
 	_ndatiOrig = countData(filename);
 	_ndati = _ndatiOrig;
 	_dataOrig = readData(filename);
