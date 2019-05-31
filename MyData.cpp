@@ -1,4 +1,4 @@
-/* fileToArray.cpp
+/* MyData.cpp
  * 
  * Copyright 2019 Marco Aliberti
  * 
@@ -22,11 +22,21 @@
 
 // constructor
 
-MyData::MyData(const char* filename){
+MyData::MyData(const char* filename = ""){
+	if(strcmp(filename,"") == 0) return NULL;
 	_ndatiOrig = countData(filename);
 	_ndati = _ndatiOrig;
 	_dataOrig = readData(filename);
 	_data = (float *) malloc(_ndati * sizeof(float));
+	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati * sizeof(float));
+}
+
+MyData::MyData(MyData* oldData){
+	_ndatiOrig = oldData->getOrigSize();
+	_ndati = _ndatiOrig;
+	_dataOrig = (float *) malloc(_ndati * sizeof(float));
+	_data = (float *) malloc(_ndati * sizeof(float));
+	_dataOrig = (float *) memcpy((void *)_dataOrig, (void *)oldData->getData(), _ndati * sizeof(float));
 	_data = (float *) memcpy((void *)_data, (void *)_dataOrig, _ndati * sizeof(float));
 }
 

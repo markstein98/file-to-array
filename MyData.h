@@ -1,4 +1,4 @@
-/* fileToArray.h
+/* MyData.h
  * 
  * Copyright 2019 Marco Aliberti
  * 
@@ -21,8 +21,8 @@
 #ifndef FILETOARRAY_H
 #define FILETOARRAY_H
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <cstdio>
+#include <cstdlib>
 
 class MyData{
 	public:
@@ -41,7 +41,8 @@ class MyData{
 	// attributes
 	
 	// constructor
-	MyData(const char* filename);
+	MyData(const char* filename = "");
+	MyData(MyData* oldData);
 	private:
 	// methods
 	FILE* myfopen(const char* filename);
@@ -50,6 +51,8 @@ class MyData{
 	// attributes
 	unsigned int _ndati, _ndatiOrig;
 	float *_data, *_dataOrig;
+	
+	ClassDef(MyData, 0);
 };
 
 #endif
