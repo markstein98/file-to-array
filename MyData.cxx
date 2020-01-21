@@ -22,12 +22,12 @@
 
 // constructor
 
-MyData::MyData(float value = 0.0, int size = 1){
+MyData::MyData(float value, int size){
 	_ndatiOrig = size;
 	_ndati = size;
 	_dataOrig = (float *) malloc(_ndati * sizeof(float));
 	_data = (float *) malloc(_ndati * sizeof(float));
-	for(int i=0;i<_ndati;i++){
+	for(uint i=0;i<_ndati;i++){
 		_dataOrig[i] = value;
 		_data[i] = value;
 	}
