@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  */
 
-#ifndef FILETOARRAY_H
-#define FILETOARRAY_H
+#ifndef MYDATA_H
+#define MYDATA_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -53,7 +53,7 @@ class MyData{
 	unsigned int _ndati, _ndatiOrig;
 	float *_data, *_dataOrig;
 	
-	ClassDef(MyData, 0);
+//	ClassDef(MyData, 0);
 };
 
 #endif
