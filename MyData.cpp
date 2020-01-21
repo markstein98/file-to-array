@@ -22,7 +22,7 @@
 
 // constructor
 
-MyData::MyData(float value = 0.0, float size = 1){
+MyData::MyData(float value = 0.0, int size = 1){
 	_ndatiOrig = size;
 	_ndati = size;
 	_dataOrig = (float *) malloc(_ndati * sizeof(float));
@@ -42,7 +42,7 @@ MyData::MyData(const char* filename){
 }
 
 MyData::MyData(MyData* oldData){
-	_ndatiOrig = oldData->getOrigSize();
+	_ndatiOrig = oldData->getSize();
 	_ndati = _ndatiOrig;
 	_dataOrig = (float *) malloc(_ndati * sizeof(float));
 	_data = (float *) malloc(_ndati * sizeof(float));
@@ -109,7 +109,7 @@ float* MyData::getOrigData(void){
 
 void MyData::removeFirstData(unsigned int num){ // removes first num data from array
 	if(num >= _ndati){
-		fprintf(stderr, "\nCould not remove first %d data.\n", num);
+		fprintf(stderr, "\nError: Could not remove first %d data.\n", num);
 		return;
 	}
 	float *newData;
@@ -122,7 +122,7 @@ void MyData::removeFirstData(unsigned int num){ // removes first num data from a
 
 void MyData::removeData(unsigned int index){ // removes data in the given position (0<=index<ndata)
 	if(index >= _ndati){
-		fprintf(stderr, "\nCould not remove data in position %d.\n", index);
+		fprintf(stderr, "\nError: Could not remove data in position %d.\n", index);
 		return;
 	}
 	float *temp, *newData;
@@ -137,7 +137,7 @@ void MyData::removeData(unsigned int index){ // removes data in the given positi
 
 void MyData::removeLastData(unsigned int num){ // removes last num data from array
 	if(num >= _ndati){
-		fprintf(stderr, "\nCould not remove last %d data.\n", num);
+		fprintf(stderr, "\nError: Could not remove last %d data.\n", num);
 		return;
 	}
 	float *newData;
@@ -160,12 +160,12 @@ void MyData::printData(int index){
 }
 
 void MyData::printOrigData(void){
-	printf("\n\n Data:\n");
+	printf("\n\n Original Data:\n");
 	for(uint i=0;i<_ndatiOrig;i++)
 		printf("%f\n", _dataOrig[i]);
 	printf("\n\n");
 }
 
 void MyData::printOrigData(int index){
-	printf("\n\n Data %d: %f\n\n", index, _dataOrig[index]);
+	printf("\n\n Original Data %d: %f\n\n", index, _dataOrig[index]);
 }
