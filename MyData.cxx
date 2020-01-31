@@ -115,7 +115,7 @@ void MyData::removeFirstData(unsigned int num){ // removes first num data from a
 	float *newData;
 	newData = (float *) malloc((_ndati - num)*sizeof(float));
 	_ndati = _ndati - num;
-	newData = (float *) memcpy((void *)newData, (void *)(_data+num),_ndati);
+	newData = (float *) memcpy((void *)newData, (void *)(_data+num),_ndati * sizeof(float));
 	free((void *)_data);
 	_data = newData;
 }
@@ -143,7 +143,7 @@ void MyData::removeLastData(unsigned int num){ // removes last num data from arr
 	float *newData;
 	_ndati = _ndati - num;
 	newData = (float *) malloc(_ndati * sizeof(float));
-	newData = (float *) memcpy((void *)newData, (void *)_data, _ndati);
+	newData = (float *) memcpy((void *)newData, (void *)_data, _ndati * sizeof(float));
 	free((void *)_data);
 	_data = newData;
 }
