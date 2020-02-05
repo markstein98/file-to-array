@@ -133,6 +133,7 @@ void MyData::removeData(unsigned int index){ // removes data in the given positi
 	temp = (float *) memcpy((void *)temp, (void *)(_data+index+1), (_ndati-index-1)*sizeof(float));
 	free((void *)_data);
 	_data = newData;
+	_ndati--;
 }
 
 void MyData::removeLastData(unsigned int num){ // removes last num data from array
